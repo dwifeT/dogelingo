@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          # Cho biết liệu các file sinh ra có được format một cách đẹp đẽ hay không
+          include_if_null: false

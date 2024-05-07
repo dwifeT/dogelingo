@@ -1,0 +1,37 @@
+# install
+# run: flutter pub global activate melos
+name: dogelingo
+packages:
+  - packages/core
+  - packages/domain
+  - packages/data
+
+
+scripts:
+  #  pub get
+  pub-get:
+    run: flutter pub get
+
+  pub-get-all:
+    run: cd packages/core && flutter pub get && cd .. && cd .. && cd packages/data && flutter pub get  && cd .. && cd .. && cd packages/domain && flutter pub get && cd .. && cd .. && cd packages/theme && flutter pub get && cd .. && cd .. && flutter pub get
+
+  pub-clean-all:
+    run: flutter clean && cd packages/core && flutter clean && cd .. && cd .. && cd packages/data && flutter clean  && cd .. && cd .. && cd packages/domain && flutter clean && cd .. && cd .. && cd packages/theme && flutter clean
+
+  clean:
+    run: clean
+
+  gen-code:
+    run: flutter packages pub run build_runner build --delete-conflicting-outputs
+
+  lang:
+    run: flutter gen-l10n
+
+  gen-code-core:
+    run: cd packages/core && flutter packages pub run build_runner build --delete-conflicting-outputs
+
+  gen-code-data:
+    run: cd packages/data && flutter packages pub run build_runner build --delete-conflicting-outputs
+
+  gen-code-domain:
+    run: cd packages/domain && flutter packages pub run build_runner build --delete-conflicting-outputs
