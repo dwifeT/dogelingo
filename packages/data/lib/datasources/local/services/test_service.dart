@@ -9,39 +9,39 @@ class TestService {
 
   TestService(this.isar);
 
-  Future<Test?> createUser(String name, String email) async {
-    final test = Test()
+  Future<TestModel?> createUser(String name, String email) async {
+    final test = TestModel()
       ..name = name
       ..email = email;
 
     await isar.writeTxn(() async {
-      await isar.tests.put(test);
+      await isar.testModels.put(test);
     });
     return test;
   }
 
-  Future<Test?> getUser(int id) async {
-    return await isar.tests.get(id);
+  Future<TestModel?> getUser(int id) async {
+    return await isar.testModels.get(id);
   }
 
-  Future<List<Test>> getAllUsers() async {
-    return await isar.tests.where().findAll();
+  Future<List<TestModel>> getAllUsers() async {
+    return await isar.testModels.where().findAll();
   }
 
   Future<void> updateUser(int id, String name, String email) async {
     await isar.writeTxn(() async {
-      final user = await isar.tests.get(id);
+      final user = await isar.testModels.get(id);
       if (user != null) {
         user.name = name;
         user.email = email;
-        await isar.tests.put(user);
+        await isar.testModels.put(user);
       }
     });
   }
 
   Future<void> deleteUser(int id) async {
     await isar.writeTxn(() async {
-      await isar.tests.delete(id);
+      await isar.testModels.delete(id);
     });
   }
 }

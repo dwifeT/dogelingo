@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:dogelingo/core/routes/route_name.dart';
+import 'package:flutter/material.dart';
 import 'package:theme/theme.dart';
 
-mixin BaseScreen {
-  Future<void> navigateToNextScreen(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 1));
-    if (context.mounted) {
-      Navigator.pushNamed(context, RouteName.registration);
-    }
+mixin SplashScreenMixin<T extends StatefulWidget> on State<T> {
+  void navigateAfterDelay() {
+    Timer(const Duration(seconds: 1), () {
+      if (context.mounted) {
+        Navigator.pushNamed(context, RouteName.registration);
+      }
+    });
   }
 }
 
@@ -18,38 +20,33 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with BaseScreen {
+class _SplashScreenState extends State<SplashScreen> with SplashScreenMixin {
+  static const splashScreenBackground = Color(0xffFFD57B);
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      navigateToNextScreen(context);
-    });
+    navigateAfterDelay();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xffFFD57B),
-      body: SplashContent(),
+    return Scaffold(
+      backgroundColor: splashScreenBackground,
+      body: _buildContent(),
     );
   }
-}
 
-class SplashContent extends StatelessWidget {
-  const SplashContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildContent() {
     return Column(
       children: [
         SizedBox(height: 30.h),
-        buildSplashImage(context),
+        _buildLogoAndText(),
       ],
     );
   }
 
-  Widget buildSplashImage(BuildContext context) {
+  Widget _buildLogoAndText() {
     return Stack(
       children: [
         SizedBox(
@@ -60,21 +57,24 @@ class SplashContent extends StatelessWidget {
           ),
         ),
         Positioned.fill(
-          child: buildLogoAndTitle(context),
+          child: _buildCenteredLogoAndTitle(),
         ),
       ],
     );
   }
 
-  Widget buildLogoAndTitle(BuildContext context) {
+  Widget _buildCenteredLogoAndTitle() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(AppPathAssets.iconSplash, width: 25.w),
+        Image.asset(
+          AppPathAssets.iconSplash,
+          width: 25.w,
+        ),
         Text(
           "LIONGO",
-          style: context.textTheme.titleLarge?.bold,
+          style: context.textTheme.titleLarge?.bold, // Ensure these styles are defined in your theme
         ),
       ],
     );

@@ -2,5 +2,10 @@ export 'package:json_annotation/json_annotation.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'di/di.dart';
 
-///usecase
-export 'usecases/local_config_usercase.dart';
+/// model
+export 'entities/test.dart';
+
+/// usecase
+
+/// repo
+export 'repositories/test_repo.dart';

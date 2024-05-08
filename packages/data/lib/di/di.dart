@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 
+import '../datasources/local/configs/local_config.dart';
 import 'di.config.dart';
 
 @InjectableInit(
@@ -7,4 +8,7 @@ import 'di.config.dart';
   preferRelativeImports: true, // default
   asExtension: true, // default
 )
-void configureDependenciesData() => getIt.init();
+void configureDependenciesData() {
+  setupIsar();
+  getIt.init();
+}

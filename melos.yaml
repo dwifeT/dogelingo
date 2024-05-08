@@ -1,5 +1,9 @@
 # install
-# run: flutter pub global activate melos
+# export PATH="$PATH:/Users/mac2/fvm/versions/3.16.0/bin"
+# echo $Path
+# flutter pub global activate melos
+# export PATH="$PATH":"$HOME/.pub-cache/bin"
+
 name: dogelingo
 packages:
   - packages/core
